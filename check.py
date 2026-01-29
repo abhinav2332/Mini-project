@@ -27,15 +27,15 @@ def log_to_db(uid, name, subject, period, date_str, status, notes=""):
         conn = get_db_connection()
         cursor = conn.cursor()
         
-        # Check if already logged to avoid duplicates
-        cursor.execute("SELECT log_id FROM attendance_log WHERE student_uid = ? AND subject_name = ? AND log_date = ?", 
-                       (str(uid), subject, date_str))
-        if cursor.fetchone():
-            # (Optional) Update existing record if needed, or just skip
-            # For now, we skip to avoid double entries
-            return
+        # # Check if already logged to avoid duplicates
+        # cursor.execute("SELECT log_id FROM attendance_log WHERE student_uid = ? AND subject_name = ? AND log_date = ?", 
+        #                (str(uid), subject, date_str))
+        # if cursor.fetchone():
+        #     # (Optional) Update existing record if needed, or just skip
+        #     # For now, we skip to avoid double entries
+        #     return
 
-        clean_uid = ''.join(filter(str.isdigit, str(uid))) 
+        # clean_uid = ''.join(filter(str.isdigit, str(uid))) 
         final_status = f"{status} ({notes})" if notes else status
 
         sql = """
